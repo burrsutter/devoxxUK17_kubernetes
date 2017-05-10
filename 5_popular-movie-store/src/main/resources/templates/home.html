@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorator="layout/default">
+<body>
+<div class="row" layout:fragment="content">
+  <div class="col s12 m5" th:each="movieCartItem : ${movies}">
+    <div class="card horizontal medium sticky-action">
+      <div class="card-image waves-effect waves-block waves-light">
+        <img class="activator" th:src="${movieCartItem.movie.posterPath}"/>
+      </div>
+      <div class="card-content">
+        <span class="card-title activator grey-text text-darken-4"><span th:text="${movieCartItem.movie.title}">Movie Title</span><i
+          class="material-icons right">more_vert</i></span>
+      </div>
+      <div class="card-action">
+        <div class="row">
+          <div class="input-field col s3">
+            <input readonly="true" th:id="${#strings.concat(movieCartItem.movie.id,'--price')}"
+                   th:value="${#numbers.formatDecimal(movieCartItem.movie.price, 0, 'DEFAULT', 2, 'DEFAULT')}"/>
+            <label class="active" th:for="${#strings.concat(movieCartItem.movie.id,'--price')}">Price($)</label>
+          </div>
+          <div class="input-field col s3 right">
+            <input th:value="${movieCartItem.quantity}" th:id="${#strings.concat(movieCartItem.movie.id,'--qty')}"
+                   type="number"
+                   max="10"
+                   min="1"/>
+            <label class="active" th:for="${#strings.concat(movieCartItem.movie.id,'--qty')}">Quantity</label>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col m2 right">
+            <a class="waves-effect waves-light btn-floating blue add-to-cart" th:data="${movieCartItem.movie.id}"><i
+              class="material-icons" th:alt="${'Add to cart'}">add</i></a>
+          </div>
+        </div>
+
+      </div>
+      <div class="card-reveal">
+          <span class="card-title grey-text text-darken-4"><span
+            th:text="${movieCartItem.movie.title}">Movie Title</span><i
+            class="material-icons right">close</i></span>
+        <p th:text="${movieCartItem.movie.overview}">Movie overview ....</p>
+      </div>
+    </div>
+  </div>
+</div>
+</body>
+</html>
