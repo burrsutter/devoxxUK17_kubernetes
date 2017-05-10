@@ -19,6 +19,9 @@ to see the logs of N pods together
 
 https://github.com/johanhaleby/kubetail
 
+More information on liveness and readiness
+https://kubernetes.io/docs/tasks/configure-pod-container/configure-liveness-readiness-probes/#defining-a-liveness-http-request
+
 
 
 
