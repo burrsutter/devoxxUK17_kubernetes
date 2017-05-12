@@ -14,7 +14,7 @@ public class MyRESTController {
 
    @RequestMapping("/")
     public String getStuff() {
-        return "Stuff " + new java.util.Date() +  " on " + hostname + "\n";
+        return "Stuff DevoxxUK " + new java.util.Date() +  " on " + hostname + "\n";
     }
 
    @RequestMapping("/areyoualive")  

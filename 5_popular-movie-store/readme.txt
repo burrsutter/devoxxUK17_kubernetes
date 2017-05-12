@@ -16,3 +16,4 @@ Make a change to cart.html
 
 ./mvnw -Pcanary -DapiKey=YtWlNDU0NTI1OWYwXNdhY3AiMTllMzMyYTVmZDuyY2U= clean fabric8:deploy 
 
+

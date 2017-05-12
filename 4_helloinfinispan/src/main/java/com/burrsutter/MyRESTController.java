@@ -48,7 +48,7 @@ public class MyRESTController {
     public String getStuff() {
         StringBuilder sb = new StringBuilder();
         Set<String> keySet = cache1.keySet();
-        sb.append("Request for /getstuff on pod: " + hostname);
+        sb.append("BE Request for /getstuff on pod: " + hostname);
         sb.append("<UL>");
         for (String key : keySet) {
             String value = cache1.get(key);
@@ -63,7 +63,7 @@ public class MyRESTController {
     @GetMapping("/curlstuff") 
     public String curlStuff() {
         StringBuilder sb = new StringBuilder();
-        sb.append(hostname + " ");
+        sb.append(hostname + " BE ");
         Set<String> keySet = cache1.keySet();
         for (String key : keySet) {
             String value = cache1.get(key);

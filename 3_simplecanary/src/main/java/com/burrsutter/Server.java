@@ -11,10 +11,13 @@ public class Server extends AbstractVerticle {
     Router router = Router.router(vertx);
 
     router.get("/").handler(ctx -> {
-        ctx.response().end("Aloha1 Vert.x on " + hostname + " " + new java.util.Date() + "\n");
+        ctx.response().end("Aloha Burr Vert.x on " + hostname + " " + new java.util.Date() + "\n");
     });
 
-    router.get("/api/health").handler(ctx -> ctx.response().end("I'm ok"));
+    router.get("/api/health").handler(ctx -> {
+      // returns 200
+      ctx.response().end("I'm ok");
+    });
 
     vertx.createHttpServer()
         .requestHandler(router::accept)

@@ -4,7 +4,9 @@ to run it on OpenShift (minishift)
 
 mvn io.fabric8:fabric8-maven-plugin:3.3.5:setup
 
-oc new-project bootie1
+oc new-project nspace
+
+oc policy add-role-to-user view system:serviceaccount:$(oc project -q):default -n $(oc project -q)
 
 mvn fabric8:deploy
 
@@ -79,20 +81,20 @@ Kubernetes/OpenShift will perform the rolling update
 and anything in your cache will be maintained during and beyond the update
 
 /addstuff?name=jim
-Added jim to 2 helloinfinispan-7-087v1
+Added jim to 2 myapp-7-087v1
 
 /getstuff
 RequestX for /getstuff on pod: helloinfinispan-7-087v1
 
-    1 helloinfinispan-6-xfpns=george
-    0 helloinfinispan-6-s0c22=mary
-    2 helloinfinispan-7-087v1=burr
+    1 myapp-6-xfpns=george
+    0 myapp-6-s0c22=mary
+    2 myapp-7-087v1=burr
 
 /clearstuff
   clears out the current cache entries
 
 /curlstuff
 makes it obvious that all pods see all the cache data
-helloinfinispan-7-087v1 1 helloinfinispan-6-xfpns=george0 helloinfinispan-6-s0c22=mary2 helloinfinispan-7-087v1=burr
-helloinfinispan-7-wbrzd 1 helloinfinispan-6-xfpns=george0 helloinfinispan-6-s0c22=mary2 helloinfinispan-7-087v1=burr
+myapp-7-087v1 1 helloinfinispan-6-xfpns=george0 helloinfinispan-6-s0c22=mary2 helloinfinispan-7-087v1=burr
+myapp-7-wbrzd 1 helloinfinispan-6-xfpns=george0 helloinfinispan-6-s0c22=mary2 helloinfinispan-7-087v1=burr
 

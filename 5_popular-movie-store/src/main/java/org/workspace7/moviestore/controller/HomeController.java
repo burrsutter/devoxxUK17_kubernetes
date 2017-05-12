@@ -146,6 +146,7 @@ public class HomeController {
     @GetMapping("/healthz")
     @ResponseStatus(HttpStatus.OK)
     public void healthz(Map<String, Object> model) {
+        // TODO: update this logic the health check in helloinfinispan
         log.trace("Health check seems to be good...");
     }
 
