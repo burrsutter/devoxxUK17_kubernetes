@@ -39,6 +39,10 @@ import java.util.Map;
 import java.util.Optional;
 import java.util.stream.Collectors;
 
+import org.infinispan.health.HealthStatus;
+import org.springframework.http.ResponseEntity;
+import org.infinispan.spring.provider.SpringEmbeddedCacheManager;
+
 /**
  * @author kameshs
  */
@@ -46,11 +50,16 @@ import java.util.stream.Collectors;
 @Slf4j
 public class HomeController {
 
-    @Autowired
-    MovieDBHelper movieDBHelper;
+    
+    final MovieDBHelper movieDBHelper;
+
+    final SpringEmbeddedCacheManager cacheManager;
 
     @Autowired
-    CacheManager cacheManager;
+    public HomeController(SpringEmbeddedCacheManager cacheManager, MovieDBHelper movieDBHelper) {
+        this.cacheManager = cacheManager;
+        this.movieDBHelper = movieDBHelper;
+    }
 
     @GetMapping("/")
     public ModelAndView home(ModelAndView modelAndView, HttpServletRequest request) {
@@ -144,10 +153,19 @@ public class HomeController {
     }
 
     @GetMapping("/healthz")
-    @ResponseStatus(HttpStatus.OK)
-    public void healthz(Map<String, Object> model) {
-        // TODO: update this logic the health check in helloinfinispan
+    
+    public ResponseEntity healthz() {
         log.trace("Health check seems to be good...");
+
+        HealthStatus healthStatus = cacheManager.getNativeCacheManager()
+            .getHealth().getClusterHealth().getHealthStatus();
+
+        if (healthStatus == HealthStatus.HEALTHY) {
+            log.info("HEALTHY");
+            return new ResponseEntity(HttpStatus.OK);
+        }
+
+        return new ResponseEntity(HttpStatus.NOT_FOUND);
     }
 
 }
