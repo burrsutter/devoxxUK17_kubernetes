@@ -1,0 +1,13 @@
+# Unfortunately the namespace is hardcoded in the pom.xml
+roleRef:
+  name: view
+subjects:
+- kind: ServiceAccount
+  name: default
+  namespace: ${openshift.project}
+- kind: ServiceAccount
+  name: ${project.artifactId}
+  namespace: ${openshift.project}
+userNames:
+- system:serviceaccount:${openshift.project}:default
+- system:serviceaccount:${openshift.project}:${project.artifactId}

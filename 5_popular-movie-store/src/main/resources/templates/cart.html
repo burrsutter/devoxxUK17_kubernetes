@@ -5,7 +5,7 @@
 <body>
 <form th:action="/cart/pay" th:method="post">
   <div class="row" layout:fragment="content">
-    <h3 class="card-title activator grey-text text-darken-4">Your Burr Movies</h3>
+    <h3 class="card-title activator grey-text text-darken-4">Your FaveX Movies</h3>
     <h6><span class="title" th:text="${hostName}">host</span></h6>
     <ul class="collection">
       <li class="collection-item avatar" th:each="cartItem : ${cartItems}">
