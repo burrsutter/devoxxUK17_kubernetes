@@ -1,7 +1,0 @@
-metadata:
-  name: ${project.artifactId}
-data:
-  application.yaml: |-
-    moviestore:
-      apiEndpointUrl: "https://api.themoviedb.org/3"
-      apiKey: "${API_KEY}"
